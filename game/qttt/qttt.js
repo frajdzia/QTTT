@@ -16,11 +16,36 @@ function showTurn() {
   }
 }
 
+function checkWin() {
+  const [a, b, c, d, e, f, g, h, i] = [...gridElements].map(e => e.value)
+  if (a == b && b == c || a == d && d == g || a == e && e == i) {
+    return a
+  }
+  else if (e == c && c == g || e == b && b == h || e == f && f == d) {
+    return e
+  }
+  else if (i == h && h == g || i == f && f == c) {
+    return i
+  }
+  return undefined
+}
+
 function registerInput(index) {
   if (!gridElements[index].value) {
     gridElements[index].value = turn
     turn = turn == "X" ? "O" : "X"
-    showTurn()
+    const win = checkWin()
+    if (!win) {
+      showTurn()
+    }
+    else if (win == "X") {
+      statusMessage.innerText = "Player X Wins!"
+      statusMessage.classList.add("win")
+    }
+    else if (win == "O") {
+      statusMessage.innerText = "Player O Wins!"
+      statusMessage.classList.add("win")
+    }
   }
 }
 
