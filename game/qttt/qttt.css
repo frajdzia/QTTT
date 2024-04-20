@@ -1,0 +1,60 @@
+.arena {
+    position: absolute;
+    width: fit-content;
+    height: fit-content;
+    inset: 0px;
+    margin: auto;
+}
+
+.square {
+    border: 1px solid hsl(0,0%,50%);
+    border-right-width: 0;
+    border-bottom-width: 0;
+    width: 12rem;
+    height: 12rem;
+    font-size: 5.4rem;
+    line-height: 6.75rem;
+    text-align: center;
+    padding: 0;
+    background-color: inherit;
+    color: inherit;
+    caret-color: transparent;
+}
+
+#status {
+    position: absolute;
+    top: -20px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+#status.win {
+    color: rgb(100, 195, 100);
+}
+
+#status.lose {
+    color: rgb(223, 97, 97);
+}
+
+input:focus {
+    outline: none;
+}
+
+/* input:hover {   
+    background-color: rgb(26, 40, 71);
+} */
+
+.square.top {
+    border-top-width: 3px;
+}
+
+.square.bottom {
+    border-bottom-width: 3px;
+}
+
+.square.left {
+    border-left-width: 3px;
+}
+
+.square.right {
+    border-right-width: 3px;
+}
