@@ -75,19 +75,7 @@ function renderGrid() {
   gridElements = grid.getElementsByClassName("square")
 }
 
-function toggleTheme() {
-  const dark = document.body.classList.toggle("dark")
-  localStorage.setItem("theme", dark ? "dark" : "light")
-}
-
 window.onload = () => {
-
-  // Set dark theme on load if selected by user
-  const theme = localStorage.getItem("theme")
-  if (theme === "dark") {
-    document.body.classList.add("dark")
-  }
-
   grid = document.getElementById("qttt");
   statusMessage = document.getElementById("status");
   renderGrid()
