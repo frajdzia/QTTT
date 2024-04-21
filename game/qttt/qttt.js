@@ -1,4 +1,4 @@
-const [gsize, bsize] = [3, 3]
+const [gsize, bsize] = [3, 1]
 var grid
 var gridElements
 var statusMessage
@@ -76,10 +76,18 @@ function renderGrid() {
 }
 
 function toggleTheme() {
-  document.body.classList.toggle("dark")
+  const dark = document.body.classList.toggle("dark")
+  localStorage.setItem("theme", dark ? "dark" : "light")
 }
 
 window.onload = () => {
+
+  // Set dark theme on load if selected by user
+  const theme = localStorage.getItem("theme")
+  if (theme === "dark") {
+    document.body.classList.add("dark")
+  }
+
   grid = document.getElementById("qttt");
   statusMessage = document.getElementById("status");
   renderGrid()
