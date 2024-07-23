@@ -6,8 +6,9 @@ body {
   margin: 0;
   background-color: var(--background-100);
   color: var(--text-800);
-  min-height: 100vh;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
+  height: 100%;
 
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -29,11 +30,20 @@ body {
   padding-bottom: 0.5rem;
   padding-left: 1rem;
   padding-right: 1rem;
+  backdrop-filter: blur(12px);
 }
 
 .theme-toggle button:hover {
-  border: 1px solid var(--secondary-700);
-  color: var(--secondary-700);
+  border: 1px solid var(--text-700);
+  color: var(--text-700);
+}
+
+.home-button {
+  left: 2rem;
+}
+
+.home-button button {
+  color: var(--text-800)
 }
 
 

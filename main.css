@@ -2,10 +2,12 @@ main {
     width: 70%;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 7rem;
     padding: 2rem;
     display: flex;
     flex-direction: column;
     align-items: center;
+    text-align: center;
 }
 
 .button-array a {
@@ -18,6 +20,7 @@ main {
     padding-left: 1rem;
     border-radius: 1rem;
     transition: color 200ms, background-color 200ms;
+    backdrop-filter: blur(12px);
 }
 
 .button-array a:hover {
@@ -35,7 +38,7 @@ main {
     gap: 1rem;
     align-items: center;
     position: fixed;
-    bottom: 5rem;
+    bottom: 8rem;
 }
 
 .our-links svg {
@@ -53,12 +56,9 @@ main {
 }
 
 .animated-bg {
-    position: absolute;
+    position: fixed;
+    top: 0;
     width: 100%;
     height: 100%;
     z-index: -10;
 }
-
-#big-ball { fill: var(--background-400); }
-#mid-ball { fill: var(--background-300); }
-#small-ball { fill: var(--background-200); }

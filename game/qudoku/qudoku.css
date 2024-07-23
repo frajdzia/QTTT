@@ -7,7 +7,7 @@
 }
 
 .square {
-    border: 1px solid hsl(0,0%,50%);
+    border: 1px solid var(--text-900);
     border-right-width: 0;
     border-bottom-width: 0;
     width: 4rem;
