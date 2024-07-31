@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <title>SMG</title>
+    <title>Quantum Tic-Tac-Toe</title>
     <link href="/style.css" rel="stylesheet">
     <script src="/main.js"></script>
 
@@ -13,17 +13,30 @@
   <body>
     <div class="theme-toggle home-button">
       <a href="/">
-        <button>Home</button>
+        <button class="nice-button">Home</button>
       </a>
     </div>
     <div class="theme-toggle">
-      <button onclick="toggleTheme()">Toggle Theme</button>
+      <button class="nice-button" onclick="toggleTheme()">Toggle Theme</button>
     </div>
-    <main>
-      <div class="arena">
-        <div id="status"></div>
-        <div id="qttt">
-          [Grid]
+    <main class="qttt-container">
+      <div class="players">
+        <div class="players-inner">
+          <div id="p1">
+            Player 1: O
+          </div>
+          <div id="p2">
+            Player 2: X
+          </div>
+          <button onclick="qttt.resetGrid()" id="reset-game-button" class="nice-button" style="visibility: visible;">Reset</button>
+        </div>
+      </div>
+      <div style="position: relative;">
+        <div class="arena">
+          <div id="status"></div>
+          <div id="qttt">
+            [Grid]
+          </div>
         </div>
       </div>
     </main>
