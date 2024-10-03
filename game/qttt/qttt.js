@@ -1,116 +1,107 @@
+var game = {
+  grid: new Array(9).fill([]),
+  state: "ready",
+  player: "X",
+  turn: 1,
+  reset() {
+    this.player = "X"
+    this.turn = 1
+    for (const i in this.grid)
+      this.grid[i] = []
+  },
+  play(index) {
+    const value = this.grid[index]
+    const token = this.player + this.turn
+    if (typeof(value) == "string") return
+    switch(this.state) {
+      case "ready":
+        value.push(token)
+        this.state = "second-move"
+        return
+      case "second-move":
+        if (value.includes(token)) return
+        value.push(token)
+        // TODO check if entangled
+        this.state = "ready"
+        this.player = this.player == "X" ? "O" : "X"
+        if (this.player == "X") this.turn += 1
+        return;
+      case "entangled":
+        // TODO
+        return;
+    }
+  },
+  winner() {
+    const [a, b, c, d, e, f, g, h, i] = this.grid.map(e => {
+      if (typeof(e) == "string") return e
+    })
+    
+    if (a && (a == b && b == c || a == d && d == g || a == e && e == i))
+      return a
+    else if (e && (e == c && c == g || e == b && b == h || e == f && f == d))
+      return e
+    else if (i && (i == h && h == g || i == f && f == c))
+      return i
+  },
+  full() {
+    return this.grid.some(e => typeof(e) != "string")
+  },
 
-function QTTT(gridElement, status) {
-  const [gsize, bsize] = [3, 1]
+}
 
-  const items = []
+function setupBoard() {
+  var gridElement = document.getElementById("qttt")
+  var statusBox = document.getElementById("status")
+  gridElement.innerHTML = ""
+  // TODO: Clear all html inside gridElement and make from scratch
+  const gsize = 3
+  const bsize = 1
   for (let i = 0; i < gsize; i += 1) {
     for (let j = 0; j < gsize; j += 1) {
       const index = gsize * i + j
-      const top = i % bsize == 0 ? " top" : ""
-      const left = j % bsize == 0 ? " left" : ""
-      const right = j == gsize - 1 ? " right" : ""
-      const bottom = i == gsize - 1 ? " bottom" : ""
-
-      items.push(
-        `<input
-          readonly
-          class="square${top}${left}${right}${bottom}"
-          onclick="qttt.registerInput(${index})"
-          maxLength="1" 
-          autoComplete="off" 
-        />`
-      )
+      const div = document.createElement("div")
+      div.classList.add("square")
+      if (i % bsize == 0) div.classList.add("top");
+      if (j % bsize == 0) div.classList.add("left");
+      if (j == gsize - 1) div.classList.add("right");
+      if (i == gsize - 1) div.classList.add("bottom");
+  
+      div.onclick = () => registerInput(index)
+      gridElement.appendChild(div)
     }
-    items.push(`<br/>`)
   }
-  gridElement.innerHTML = items.join("")
-  const squares = gridElement.getElementsByClassName("square")
+  statusBox.innerText = `Player ${game.player}'s Turn`
+}
 
-  status.innerText = "Player X's Turn"
-  function showTurn(turn) {
-    if (turn == "X") {
-      status.innerText = "Player X's Turn"
-    }
-    else if (turn == "O") {
-      status.innerText = "Player O's Turn"
+function drawBoard() {
+  const divs = document.getElementsByClassName("square")
+  for (const index in game.grid) {
+    const value = game.grid[index]
+    if (typeof(value) == "string") {
+      divs[index].innerText = value
+      divs[index].classList.add("collapsed")
     }
     else {
-      status.innerText = ""
+      divs[index].innerText = value.join(",")
     }
-  }
-
-  return {
-    turn: "X",
-    grid: Array(9).fill(""),
-    checkWin() {
-      const [a, b, c, d, e, f, g, h, i] = [...squares].map(e => e.value)
-      if (a == b && b == c || a == d && d == g || a == e && e == i) {
-        return a
-      }
-      else if (e == c && c == g || e == b && b == h || e == f && f == d) {
-        return e
-      }
-      else if (i == h && h == g || i == f && f == c) {
-        return i
-      }
-      return undefined
-    },
-    
-    checkFull() {
-      const entries = [...squares].map(e => e.value)
-      return !entries.some(e => !e)
-    },
-    
-    registerInput(index) {
-      if (!squares[index].value) {
-        const win = this.checkWin()
-        const full = this.checkFull()
-
-        squares[index].value = this.turn
-        this.turn = this.turn == "X" ? "O" : "X"
-        
-    
-        if (!win && full) {
-          status.innerText = "Draw."
-          status.classList.add("lose")
-          return
-        }
-        else if (!win) {
-          showTurn(this.turn)
-        }
-        else if (win == "X") {
-          status.innerText = "Player X Wins!"
-          status.classList.add("win")
-          return
-        }
-        else if (win == "O") {
-          status.innerText = "Player O Wins!"
-          status.classList.add("win")
-          return
-        }
-        
-        if (win || full) {
-          document.getElementById("reset-game-button").style = "visibility: visible;"
-        }
-        else {
-          document.getElementById("reset-game-button").style = "visibility: hidden;"
-        }
-      }
-    },
-    
-    resetGrid() {
-      for (const e of squares) {
-        e.value = ""
-      }
-      showTurn("X")
-      status.classList = ""
-      document.getElementById("reset-game-button").style = "visibility: hidden;"
-    },
-
   }
 }
 
-var qttt
+function registerInput(index) {
+  game.play(index)
+  drawBoard()
+  const winner = game.winner()
+  if (game.full() && !winner) {
+    statusBox.innerText = "Draw. Adios"
+    game.status = "end"
+  }
+  else if (winner) {
+    statusBox.innerText = `Winner is ${game.player}`
+    game.status = "end"
+  }
+}
+
 window.onload = () => {
-  qttt = QTTT(document.getElementById("qttt"), document.getElementById("status"))
+  game.reset();
+  setupBoard();
 }
