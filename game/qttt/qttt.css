@@ -9,20 +9,53 @@
 
 #qttt {
     display: grid;
+    border: 2px solid var(--text-800);
     grid-template-columns: repeat(3, 1fr);
 }
 
 .square {
-    border: 1px solid var(--text-800);
+    border: 2px solid var(--text-800);
     width: 12rem;
     height: 12rem;
     font-size: 2rem;
-    line-height: 6.75rem;
     text-align: center;
+    vertical-align: middle;
     padding: 0;
     background-color: inherit;
     color: inherit;
-    caret-color: transparent;
+    text-wrap: wrap;
+}
+
+.entangled {
+    border: 3px dashed var(--text-800);
+    background-color: rgba(255, 255, 255, 0.1);
+    display: flex;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    flex-flow: wrap;
+}
+
+.entangled:hover{
+    background-color:rgba(255, 0, 0, 0.2) ;
+}
+
+.entangled > span {
+    display: block;
+    border: 1px solid red;
+    height: fit-content;
+    cursor: pointer;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.5rem;
+    margin: 0;
+}
+
+.entangled > span:hover {
+    background-color:rgba(0, 0, 255, 0.2) ;
+}
+
+
+.collapsed {
+    font-size: 4rem;
 }
 
 #status {
@@ -46,22 +79,6 @@ input:focus {
 /* input:hover {   
     background-color: rgb(26, 40, 71);
 } */
-
-.square.top {
-    border-top-width: 3px;
-}
-
-.square.bottom {
-    border-bottom-width: 3px;
-}
-
-.square.left {
-    border-left-width: 3px;
-}
-
-.square.right {
-    border-right-width: 3px;
-}
 
 .players {
     display: flex;
