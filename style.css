@@ -35,6 +35,7 @@ body {
 }
 
 .nice-button:hover {
+  cursor: pointer;
   border: 1px solid var(--text-700);
   color: var(--text-700);
 }

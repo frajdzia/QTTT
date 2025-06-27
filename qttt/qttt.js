@@ -83,12 +83,12 @@ var game = {
       if (typeof (e) == "string") return e
     })
 
-    if (a && (a == b && b == c || a == d && d == g || a == e && e == i))
-      return a
-    else if (e && (e == c && c == g || e == b && b == h || e == f && f == d))
-      return e
-    else if (i && (i == h && h == g || i == f && f == c))
-      return i
+    if (a && ((a == b && b == c) || (a == d && d == g) || (a == e && e == i)))
+      {console.log(a);return a}
+    if (e && ((e == c && c == g) || (e == b && b == h) || (e == f && f == d)))
+      {console.log(e);return e}
+    if (i && ((i == h && h == g) || (i == f && f == c)))
+      {console.log(i);return i}
   },
   full() {
     return !this.grid.some(e => typeof (e) != "string")
@@ -158,7 +158,7 @@ function registerInput(index) {
   drawBoard()
   const winner = game.winner()
   if (game.full() && !winner) {
-    statusBox.innerText = "Draw. Adios"
+    statusBox.innerText = "Draw"
     game.status = "end"
   }
   else if (winner) {
@@ -173,6 +173,15 @@ function registerInput(index) {
       divs[index].classList.add("entangled")
     }
   }
+  else{
+     statusBox.innerText = `Player ${game.player}'s Turn`
+  }
+}
+
+function resetGame() {
+  game.reset();
+  setupBoard();
+  drawBoard();
 }
 
 window.onload = () => {
