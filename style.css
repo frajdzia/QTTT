@@ -62,18 +62,6 @@ body {
   --secondary-900: #042f24;
   --secondary-950: #021812;
 
-  --accent-50: #e9fcf9;
-  --accent-100: #d2f9f2;
-  --accent-200: #a6f2e6;
-  --accent-300: #79ecd9;
-  --accent-400: #4ce6cc;
-  --accent-500: #20dfbf;
-  --accent-600: #19b399;
-  --accent-700: #138673;
-  --accent-800: #0d594d;
-  --accent-900: #062d26;
-  --accent-950: #031613;
-
   --primary-50: #e8fcf6;
   --primary-100: #d2f9ed;
   --primary-200: #a4f4dc;
@@ -160,16 +148,15 @@ body.dark {
   --text-800: #a4d0f4;
   --text-900: #d2e7f9;
   --text-950: #e8f3fc;
-
-  --accent-50: #031715;
-  --accent-100:  #052e29;
-  --accent-200:  #0a5c52;
-  --accent-300:  #0f8a7b;
-  --accent-400:  #14b8a5;
-  --accent-500:  #19e6ce;
-  --accent-600:  #47ebd8;
-  --accent-700:  #75f0e1;
-  --accent-800:  #a3f5eb;
-  --accent-900:  #d1faf5;
-  --accent-950:  #e8fcfa;
 }
+
+.frame {
+        background: var(--background-200);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        background-image: linear-gradient(var(--background-100), var(--background-50)), linear-gradient(to right, var(--background-600), var(--background-700));
+        background-origin: border-box;
+        background-clip: padding-box, border-box;
+        max-width: 600px;
+        margin: 0 auto;
+        width: 100%;
+    }
